@@ -1,0 +1,3 @@
+monster Orc Swing
+
+weapon Sword 60
