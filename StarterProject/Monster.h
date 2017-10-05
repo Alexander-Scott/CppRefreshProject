@@ -9,29 +9,30 @@ public:
 	Monster(MonsterType monsterType, Weapon weapon, int contestantNumber);
 	~Monster();
 
-	float CalculateDamageToGive(float enemyDefenceBonus);
+	float CalculateDamageToDeal(float enemyDefenceBonus);
 	float GetCurrentHitPoints();
-	bool CheckDead();
+	float GetDefenceBonus();
+
+	bool GetDeadStatus();
+
+	std::string GetVictoryText();
+	std::string GetMonsterType();
+	std::string GetContestantDetails();
 
 	void ReceiveDamage(float damage);
 	void SetDead();
-
-	std::string GetVictoryText();
-	std::string GetDeathText();
-	int GetContestantNumber();
-	float GetDefenceBonus();
 
 private:
 	MonsterType				_monsterType;
 	Weapon					_weapon;
 
+	int						_contestantNumber;
+
 	float					_startHitpoints;
-	float					_hitpoints;
+	float					_currentHitpoints;
 	float					_attackAccuracy;
 	float					_defenceBonus;
 
 	bool					_isDead;
-
-	int						_contestantNumber;
 };
 

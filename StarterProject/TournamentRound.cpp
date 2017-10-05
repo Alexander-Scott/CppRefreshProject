@@ -1,8 +1,6 @@
 #include "TournamentRound.h"
 #include <sstream>
 
-
-
 TournamentRound::TournamentRound()
 {
 }
@@ -18,57 +16,60 @@ void TournamentRound::SetupRound(std::vector<Monster*>* monsters)
 	_monsterContestents = monsters;
 }
 
+// Play the round and perform the battling
 std::vector<std::string>* TournamentRound::Play()
 {
+	// Create the vector that will hold a description on who died
 	std::vector<std::string>* deathStrings = new std::vector<std::string>;
 
-	size_t size = _monsterContestents->size();
+	// Cache the original number of contestants before the vector starts shrinking
+	size_t numberOfContestants = _monsterContestents->size();
 
-	for (int i = 0; i < size; i += 2)
+	for (int iContestant = 0; iContestant < numberOfContestants; iContestant += 2)
 	{
-		int rand1 = GetRandomNumberInt(0, _monsterContestents->size() - 1);
-		Monster* contestant1 = _monsterContestents->at(rand1);
-		_monsterContestents->erase(_monsterContestents->begin() + rand1);
+		// Find and cache a random contestant. Remove said contestant from the vector so it doesn't get included in future battles this round
+		int contestantIndex = GetRandomNumberInt(0, _monsterContestents->size() - 1);
+		Monster* contestant1 = _monsterContestents->at(contestantIndex);
+		_monsterContestents->erase(_monsterContestents->begin() + contestantIndex);
 
-		if (_monsterContestents->size() == 0) // If there is an odd number of contestants, the final contestant gets a free pass to the next round
+		// If there is an odd number of contestants, this will be true and the final contestant gets a free pass to the next round
+		if (_monsterContestents->size() == 0) 
 		{
 			std::stringstream ss;
-			ss << "Contestant " << contestant1->GetContestantNumber() << ", a " << contestant1->GetDeathText() << ", was automatically moved to the next round because of an odd number.";
+			ss << "Contestant " << contestant1->GetContestantDetails() << ", a " << contestant1->GetMonsterType() << ", was automatically moved to the next round because of an odd number.";
 			deathStrings->push_back(ss.str());
 			break;
 		}
 
-		int rand2 = GetRandomNumberInt(0, _monsterContestents->size() - 1);
-		Monster* contestant2 = _monsterContestents->at(rand2);
-		_monsterContestents->erase(_monsterContestents->begin() + rand2);
+		// Get the opposing contest using the same technique
+		contestantIndex = GetRandomNumberInt(0, _monsterContestents->size() - 1);
+		Monster* contestant2 = _monsterContestents->at(contestantIndex);
+		_monsterContestents->erase(_monsterContestents->begin() + contestantIndex);
 
-		// While both monsters are alive
-		while (contestant1->GetCurrentHitPoints() > 0 &&
-			contestant2->GetCurrentHitPoints() > 0)
+		// While both monsters are alive, deal damage to each and fight to the death
+		while (contestant1->GetCurrentHitPoints() > 0 && contestant2->GetCurrentHitPoints() > 0)
 		{
-			contestant1->ReceiveDamage(contestant2->CalculateDamageToGive(contestant1->GetDefenceBonus()));
-			contestant2->ReceiveDamage(contestant1->CalculateDamageToGive(contestant2->GetDefenceBonus()));
+			contestant1->ReceiveDamage(contestant2->CalculateDamageToDeal(contestant1->GetDefenceBonus()));
+			contestant2->ReceiveDamage(contestant1->CalculateDamageToDeal(contestant2->GetDefenceBonus()));
 		}
 
 		if (contestant1->GetCurrentHitPoints() <= 0)
 		{
-			// MONSTER i IS DEAD
-			contestant2->SetDead();
+			contestant2->SetDead(); // ????????????????????????? WRONG CONTESTANT BUT STILL WORKS?????
 
 			std::stringstream ss;
-			ss << "Contestant " << contestant1->GetContestantNumber() << ", a " << contestant1->GetVictoryText() << " Contestant "
-				<< contestant2->GetContestantNumber() << ", a " << contestant2->GetDeathText() << ".";
+			ss << "Contestant " << contestant1->GetContestantDetails() << ", a " << contestant1->GetVictoryText() << " Contestant "
+				<< contestant2->GetContestantDetails() << ", a " << contestant2->GetMonsterType() << ".";
 
 			deathStrings->push_back(ss.str());
 		}
 		else
 		{
-			// MONSTER i+1 IS DEAD
-			contestant1->SetDead();
+			contestant1->SetDead(); // ????????????????????????? WRONG CONTESTANT BUT STILL WORKS?????
 
 			std::stringstream ss;
-			ss << "Contestant " << contestant2->GetContestantNumber() << ", a " << contestant2->GetVictoryText() << " Contestant "
-				<< contestant1->GetContestantNumber() << ", a " << contestant1->GetDeathText() << ".";
+			ss << "Contestant " << contestant2->GetContestantDetails() << ", a " << contestant2->GetVictoryText() << " Contestant "
+				<< contestant1->GetContestantDetails() << ", a " << contestant1->GetMonsterType() << ".";
 
 			deathStrings->push_back(ss.str());
 		}

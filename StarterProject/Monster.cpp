@@ -1,16 +1,15 @@
 #include "Monster.h"
 
-
-
-Monster::Monster(MonsterType monsterTyp, Weapon weapon, int contestantNumber)
+// Creates a monster object and recieves various parameters. The rest of the attributes are randomly generated
+Monster::Monster(MonsterType monsterType, Weapon weapon, int contestantNumber)
 {
 	_startHitpoints = GetRandomNumberFloat(600, 1000);
-	_hitpoints = _startHitpoints;
+	_currentHitpoints = _startHitpoints;
 
-	_attackAccuracy = GetRandomNumberFloat(50, 80); // 0 TO 100
-	_defenceBonus = GetRandomNumberFloat(30, 80); // 0 TO 100
+	_attackAccuracy = GetRandomNumberFloat(50, 80);
+	_defenceBonus = GetRandomNumberFloat(30, 80);
 
-	_monsterType = monsterTyp;
+	_monsterType = monsterType;
 	_weapon = weapon;
 
 	_contestantNumber = contestantNumber;
@@ -18,12 +17,14 @@ Monster::Monster(MonsterType monsterTyp, Weapon weapon, int contestantNumber)
 	_isDead = false;
 }
 
-
 Monster::~Monster()
 {
 }
 
-float Monster::CalculateDamageToGive(float enemyDefenceBonus)
+// Calculates how much damage to deal to the enemy. This monster has to successfully hit the monster (calculated through _attackAccuracy) 
+// and the enemy can't block it (calculated through enemyDefenceBonus).
+// If both are successful a random damage number is generated and then multiplied based on the monsters weapon's damage
+float Monster::CalculateDamageToDeal(float enemyDefenceBonus)
 {
 	float rand = GetRandomNumberFloat(0, 100);
 
@@ -41,19 +42,22 @@ float Monster::CalculateDamageToGive(float enemyDefenceBonus)
 	return rand;
 }
 
-float Monster::GetCurrentHitPoints()
-{
-	return _hitpoints;
-}
-
+// Remove an amount of hitpoints from this monsters current hitpoints
 void Monster::ReceiveDamage(float damage)
 {
-	_hitpoints = _hitpoints - damage;
+	_currentHitpoints = _currentHitpoints - damage;
 }
 
+// Set this monster to dead
 void Monster::SetDead()
 {
 	_isDead = true;
+}
+
+// Return the current hitpoints of this monster
+float Monster::GetCurrentHitPoints()
+{
+	return _currentHitpoints;
 }
 
 std::string Monster::GetVictoryText()
@@ -64,14 +68,25 @@ std::string Monster::GetVictoryText()
 	return ss.str();
 }
 
-std::string Monster::GetDeathText()
+std::string Monster::GetMonsterType()
 {
 	return _monsterType.monsterName;
 }
 
-int Monster::GetContestantNumber()
+std::string Monster::GetContestantDetails()
 {
-	return _contestantNumber;
+	std::stringstream ss;
+
+	if (DISPLAY_MONSTER_STATS)
+	{
+		ss << _contestantNumber << "(A" << _attackAccuracy << ",D" << _defenceBonus << ",H" << _startHitpoints << ")";
+	}
+	else 
+	{
+		ss << _contestantNumber;
+	}
+
+	return ss.str();
 }
 
 float Monster::GetDefenceBonus()
@@ -79,7 +94,7 @@ float Monster::GetDefenceBonus()
 	return _defenceBonus;
 }
 
-bool Monster::CheckDead()
+bool Monster::GetDeadStatus()
 {
 	return _isDead;
 }

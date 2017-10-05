@@ -15,6 +15,7 @@ public:
 private:
 	void GetMonsterTypes();
 	void CreateMonsterInstances();
+	MonsterType GetRandomMonsterType();
 
 private:
 	std::vector<MonsterType>*		_monsterTypes;

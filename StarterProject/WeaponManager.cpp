@@ -1,5 +1,6 @@
 #include "WeaponManager.h"
 
+// Read from a file, all the types of weapon and their respective damage, to be used in the tournament
 WeaponManager::WeaponManager()
 {
 	_weapons = new std::vector<Weapon>;
@@ -8,7 +9,7 @@ WeaponManager::WeaponManager()
 
 	for (int i = 0; i < parsedWeapons->size(); i++)
 	{
-		size_t split = parsedWeapons->at(i).find(" ");
+		size_t split = parsedWeapons->at(i).find(",");
 
 		Weapon weapon;
 		weapon.weaponName = parsedWeapons->at(i).substr(0, split).c_str();
@@ -16,14 +17,15 @@ WeaponManager::WeaponManager()
 
 		_weapons->push_back(weapon);
 	}
-}
 
+	delete parsedWeapons;
+	parsedWeapons = nullptr;
+}
 
 WeaponManager::~WeaponManager()
 {
 	delete _weapons;
 }
-
 
 Weapon WeaponManager::GetRandomWeapon()
 {

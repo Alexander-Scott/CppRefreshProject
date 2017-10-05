@@ -6,6 +6,9 @@
 #include <string>
 #include <vector>
 
+const bool DISPLAY_MONSTER_STATS = false;
+const bool ROUND_RESULT_DELAY = false;
+
 enum GameState 
 {
 	WaitingForFirstInput,
@@ -25,13 +28,13 @@ struct Weapon
 	float damage;
 };
 
+// Reads in values from a text file and returns them as a vector of strings. Format is: 'delimiter object'.
 static std::vector<std::string>* ParseConstsFromFile(const char* delimiter)
 {
 	std::vector<std::string>* parsedObjects = new std::vector<std::string>;
 
 	std::ifstream infile("./configFile.txt");
 	std::string line;
-	std::size_t found = line.find("framerate");
 
 	while (std::getline(infile, line, '\n'))
 	{
@@ -45,11 +48,13 @@ static std::vector<std::string>* ParseConstsFromFile(const char* delimiter)
 	return parsedObjects;
 }
 
+// Returns a random float between two floats
 static float GetRandomNumberFloat(float min, float max)
 {
 	return min + (rand() % static_cast<int>(max - min + 1));
 }
 
+// Returns a random integer between two integers
 static int GetRandomNumberInt(int min, int max)
 {
 	std::random_device rd;     // only used once to initialise (seed) engine
