@@ -9,11 +9,14 @@ public:
 	Tournament(int numberOfMonsters);
 	~Tournament();
 
-	void PlayRound();
+	bool PlayRound();
+
+private:
+	int CalculateNumberOfRounds(int numberOfMonsters);
 
 private:
 	MonsterManager*				_monsterManager;
 	int							_currentRound;
-
+	int							_totalRounds;
 };
 

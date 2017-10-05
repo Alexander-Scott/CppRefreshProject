@@ -10,7 +10,6 @@ enum GameState
 {
 	WaitingForFirstInput,
 	WaitingToStartRound,
-	PlayingRound,
 	TournamentComplete
 };
 
