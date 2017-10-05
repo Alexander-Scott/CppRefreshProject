@@ -38,9 +38,8 @@ std::vector<std::string>* TournamentRound::Play()
 			_monsterContestents->at(i)->SetDead();
 
 			std::stringstream ss;
-			ss << "Contestant " << i << ", an " << _monsterContestents->at(i)->GetMonsterType().monsterName
-				<< ", used attack style: " << _monsterContestents->at(i)->GetMonsterType().attackStyle
-				<< ", to kill Contestant " << i + 1 << ", an " << _monsterContestents->at(i + 1)->GetMonsterType().monsterName;
+			ss << "Contestant " << i << ", a " << _monsterContestents->at(i)->GetVictoryText() << " Contestant " 
+				<< i + 1 << ", a " << _monsterContestents->at(i + 1)->GetDeathText() << ".";
 
 			deathStrings->push_back(ss.str());
 		}
@@ -50,9 +49,8 @@ std::vector<std::string>* TournamentRound::Play()
 			_monsterContestents->at(i+1)->SetDead();
 
 			std::stringstream ss;
-			ss << "Contestant " << i+1 << ", an " << _monsterContestents->at(i + 1)->GetMonsterType().monsterName
-				<< ", used attack style: " << _monsterContestents->at(i + 1)->GetMonsterType().attackStyle
-				<< ", to kill Contestant " << i << ", an " << _monsterContestents->at(i)->GetMonsterType().monsterName;
+			ss << "Contestant " << i+1 << ", a " << _monsterContestents->at(i+1)->GetVictoryText() << " Contestant "
+				<< i << ", a " << _monsterContestents->at(i)->GetDeathText();
 
 			deathStrings->push_back(ss.str());
 		}

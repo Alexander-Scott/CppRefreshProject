@@ -8,13 +8,13 @@
 
 struct MonsterType 
 {
-	const char* monsterName;
-	const char* attackStyle;
+	std::string monsterName;
+	std::string attackStyle;
 };
 
 struct Weapon 
 {
-	const char* weaponName;
+	std::string weaponName;
 	float damage;
 };
 
@@ -30,7 +30,7 @@ static std::vector<std::string>* ParseConstsFromFile(const char* delimiter)
 	{
 		if (line.compare(0, strlen(delimiter), delimiter) == 0)
 		{
-			line.erase(0, strlen(delimiter) + 2);
+			line.erase(0, strlen(delimiter) + 1);
 			parsedObjects->push_back(line);
 		}
 	}

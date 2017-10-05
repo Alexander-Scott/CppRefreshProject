@@ -43,9 +43,17 @@ void Monster::SetDead()
 	_isDead = true;
 }
 
-MonsterType Monster::GetMonsterType()
+std::string Monster::GetVictoryText()
 {
-	return _monsterType;
+	std::stringstream ss;
+	ss << _monsterType.monsterName << ", used a " << _weapon.weaponName << " to " << _monsterType.attackStyle;
+
+	return ss.str();
+}
+
+std::string Monster::GetDeathText()
+{
+	return _monsterType.monsterName;
 }
 
 bool Monster::CheckDead()

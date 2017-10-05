@@ -1,3 +1,12 @@
 monster Orc Swing
+monster Knight Slash
+monster Goblin Bash
+monster Ogre Bash
+monster Elf Slice
 
 weapon Sword 60
+weapon Dagger 50
+weapon Longsword 60
+weapon Axe 65
+weapon Mace 60
+weapon Excalibur 70

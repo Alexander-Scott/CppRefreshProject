@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Consts.h"
+#include <sstream>
 
 class Monster
 {
@@ -14,7 +15,8 @@ public:
 
 	void ReceiveDamage(float damage);
 	void SetDead();
-	MonsterType GetMonsterType();
+	std::string GetVictoryText();
+	std::string GetDeathText();
 
 private:
 	
