@@ -1,10 +1,11 @@
 #include "MonsterManager.h"
 
-MonsterManager::MonsterManager()
+MonsterManager::MonsterManager(int numberOfMonsters)
 {
 	GetMonsterTypes();
 
 	_weaponManager = new WeaponManager;
+	_numberOfMonsters = numberOfMonsters;
 
 	CreateMonsterInstances();
 }
@@ -42,10 +43,10 @@ void MonsterManager::CreateMonsterInstances()
 {
 	_monsters = new std::vector<Monster>;
 
-	for (int i = 0; i < 50; i++)
+	for (int i = 0; i < _numberOfMonsters; i++)
 	{
 		float randomIndex = GetRandomNumberInt(0, _monsterTypes->size() - 1);
-		Monster monster = Monster(_monsterTypes->at(randomIndex), _weaponManager->GetRandomWeapon());
+		Monster monster = Monster(_monsterTypes->at(randomIndex), _weaponManager->GetRandomWeapon(), i + 1);
 		_monsters->push_back(monster);
 	}
 }

@@ -2,11 +2,10 @@
 #include <iostream>
 #include <string>
 
-Tournament::Tournament()
+Tournament::Tournament(int numberOfMonsters)
 {
-	_monsterManager = new MonsterManager;
-
-	PlayRound();
+	_monsterManager = new MonsterManager(numberOfMonsters);
+	_currentRound = 1;
 }
 
 
@@ -33,6 +32,9 @@ void Tournament::PlayRound()
 
 	tournamentRound->SetupRound(competingMonsters);
 
+	std::cout << "Round " << _currentRound << " starting..." << std::endl;
+	std::cout << "===========================================" << std::endl;
+
 	std::vector<std::string>* deathStrings = tournamentRound->Play();
 
 	// Print out results from round
@@ -41,6 +43,10 @@ void Tournament::PlayRound()
 		std::cout << deathStrings->at(i) << std::endl;
 	}
 
+	std::cout << "===========================================" << std::endl;
+
+	_currentRound++;
+	
 	delete tournamentRound;
 	delete deathStrings;
 }

@@ -6,10 +6,9 @@
 class Tournament
 {
 public:
-	Tournament();
+	Tournament(int numberOfMonsters);
 	~Tournament();
 
-private:
 	void PlayRound();
 
 private:

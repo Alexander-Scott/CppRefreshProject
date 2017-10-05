@@ -6,6 +6,14 @@
 #include <string>
 #include <vector>
 
+enum GameState 
+{
+	WaitingForFirstInput,
+	WaitingToStartRound,
+	PlayingRound,
+	TournamentComplete
+};
+
 struct MonsterType 
 {
 	std::string monsterName;

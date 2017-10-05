@@ -7,7 +7,7 @@
 class MonsterManager
 {
 public:
-	MonsterManager();
+	MonsterManager(int numberOfMonsters);
 	~MonsterManager();
 
 	std::vector<Monster>* GetMonsters();
@@ -21,5 +21,7 @@ private:
 	std::vector<Monster>*			_monsters;
 
 	WeaponManager*					_weaponManager;
+
+	int								_numberOfMonsters;
 };
 

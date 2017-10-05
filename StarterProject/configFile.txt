@@ -1,12 +1,20 @@
-monster Orc Swing
+monster Orc Snap
 monster Knight Slash
 monster Goblin Bash
 monster Ogre Bash
 monster Elf Slice
+monster Dwarf Pummel
+monster Troll Crush
+monster Minotaur Dismember
+monster Giant Trample
 
-weapon Sword 60
-weapon Dagger 50
-weapon Longsword 60
-weapon Axe 65
-weapon Mace 60
-weapon Excalibur 70
+weapon Sword 3
+weapon Dagger 1
+weapon Longsword 4
+weapon Axe 5
+weapon Mace 4
+weapon Excalibur 10
+weapon Flail 6
+weapon Spear 6
+weapon Halberd 7
+weapon Knuckleduster 3
