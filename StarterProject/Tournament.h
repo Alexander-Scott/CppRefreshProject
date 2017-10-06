@@ -6,15 +6,14 @@
 class Tournament
 {
 public:
-	Tournament(int numberOfMonsters);
+	explicit Tournament(int numberOfMonsters);
 	~Tournament();
 
 	bool PlayRound();
 
 private:
-	int CalculateNumberOfRounds(int numberOfMonsters);
+	static int CalculateNumberOfRounds(int numberOfMonsters);
 
-private:
 	MonsterManager*				_monsterManager;
 	int							_currentRound;
 	int							_totalRounds;

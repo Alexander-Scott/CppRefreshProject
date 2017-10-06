@@ -5,21 +5,20 @@ WeaponManager::WeaponManager()
 {
 	_weapons = new std::vector<Weapon>;
 
-	std::vector<std::string>* parsedWeapons = ParseConstsFromFile("weapon");
+	auto parsedWeapons = ParseConstsFromFile("weapon");
 
 	for (int i = 0; i < parsedWeapons->size(); i++)
 	{
-		size_t split = parsedWeapons->at(i).find(",");
+		const auto split = parsedWeapons->at(i).find(",");
 
 		Weapon weapon;
-		weapon.weaponName = parsedWeapons->at(i).substr(0, split).c_str();
-		weapon.damage = std::stof(parsedWeapons->at(i).substr(split + 1, parsedWeapons->at(i).length()).c_str());
+		weapon.WeaponName = parsedWeapons->at(i).substr(0, split).c_str();
+		weapon.Damage = std::stof(parsedWeapons->at(i).substr(split + 1, parsedWeapons->at(i).length()).c_str());
 
 		_weapons->push_back(weapon);
 	}
 
 	delete parsedWeapons;
-	parsedWeapons = nullptr;
 }
 
 WeaponManager::~WeaponManager()
@@ -27,8 +26,8 @@ WeaponManager::~WeaponManager()
 	delete _weapons;
 }
 
-Weapon WeaponManager::GetRandomWeapon()
+Weapon WeaponManager::GetRandomWeapon() const
 {
-	float randomIndex = GetRandomNumberInt(0, _weapons->size() - 1);
+	const float randomIndex = GetRandomNumberInt(0, _weapons->size() - 1);
 	return _weapons->at(randomIndex);
 }

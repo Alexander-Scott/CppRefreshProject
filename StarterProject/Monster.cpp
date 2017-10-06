@@ -1,7 +1,7 @@
 #include "Monster.h"
 
 // Creates a monster object and recieves various parameters. The rest of the attributes are randomly generated
-Monster::Monster(MonsterType monsterType, Weapon weapon, int contestantNumber)
+Monster::Monster(const MonsterType monsterType, const Weapon weapon, const int contestantNumber)
 {
 	_startHitpoints = GetRandomNumberFloat(600, 1000);
 	_currentHitpoints = _startHitpoints;
@@ -24,9 +24,9 @@ Monster::~Monster()
 // Calculates how much damage to deal to the enemy. This monster has to successfully hit the monster (calculated through _attackAccuracy) 
 // and the enemy can't block it (calculated through enemyDefenceBonus).
 // If both are successful a random damage number is generated and then multiplied based on the monsters weapon's damage
-float Monster::CalculateDamageToDeal(float enemyDefenceBonus)
+float Monster::CalculateDamageToDeal(const float enemyDefenceBonus) const
 {
-	float rand = GetRandomNumberFloat(0, 100);
+	auto rand = GetRandomNumberFloat(0, 100);
 
 	if (rand > _attackAccuracy) // Unsuccessful hit
 		return 0;
@@ -37,13 +37,13 @@ float Monster::CalculateDamageToDeal(float enemyDefenceBonus)
 		return 0;
 
 	rand = GetRandomNumberFloat(1, 10); // Calculate damage
-	rand = rand * _weapon.damage; // Multiply it by the weapons damage
+	rand = rand * _weapon.Damage; // Multiply it by the weapons damage
 	
 	return rand;
 }
 
 // Remove an amount of hitpoints from this monsters current hitpoints
-void Monster::ReceiveDamage(float damage)
+void Monster::ReceiveDamage(const float damage)
 {
 	_currentHitpoints = _currentHitpoints - damage;
 }
@@ -55,25 +55,25 @@ void Monster::SetDead()
 }
 
 // Return the current hitpoints of this monster
-float Monster::GetCurrentHitPoints()
+float Monster::GetCurrentHitPoints() const
 {
 	return _currentHitpoints;
 }
 
-std::string Monster::GetVictoryText()
+std::string Monster::GetVictoryText() const
 {
 	std::stringstream ss;
-	ss << _monsterType.monsterName << ", used a " << _weapon.weaponName << " to " << _monsterType.attackStyle;
+	ss << _monsterType.MonsterName << ", used a " << _weapon.WeaponName << " to " << _monsterType.AttackStyle;
 
 	return ss.str();
 }
 
-std::string Monster::GetMonsterType()
+std::string Monster::GetMonsterType() const
 {
-	return _monsterType.monsterName;
+	return _monsterType.MonsterName;
 }
 
-std::string Monster::GetContestantDetails()
+std::string Monster::GetContestantDetails() const
 {
 	std::stringstream ss;
 
@@ -89,12 +89,12 @@ std::string Monster::GetContestantDetails()
 	return ss.str();
 }
 
-float Monster::GetDefenceBonus()
+float Monster::GetDefenceBonus() const
 {
 	return _defenceBonus;
 }
 
-bool Monster::GetDeadStatus()
+bool Monster::GetDeadStatus() const
 {
 	return _isDead;
 }
