@@ -48,18 +48,7 @@ void Monster::ReceiveDamage(float damage)
 	_currentHitpoints = _currentHitpoints - damage;
 }
 
-// Set this monster to dead
-void Monster::SetDead()
-{
-	_isDead = true;
-}
-
-// Return the current hitpoints of this monster
-float Monster::GetCurrentHitPoints()
-{
-	return _currentHitpoints;
-}
-
+// Return a string built from name, weapon and attack style
 std::string Monster::GetVictoryText()
 {
 	std::stringstream ss;
@@ -68,11 +57,7 @@ std::string Monster::GetVictoryText()
 	return ss.str();
 }
 
-std::string Monster::GetMonsterType()
-{
-	return _monsterType.monsterName;
-}
-
+// Return a string containing the contestants details and optionally stats
 std::string Monster::GetContestantDetails()
 {
 	std::stringstream ss;
@@ -87,14 +72,4 @@ std::string Monster::GetContestantDetails()
 	}
 
 	return ss.str();
-}
-
-float Monster::GetDefenceBonus()
-{
-	return _defenceBonus;
-}
-
-bool Monster::GetDeadStatus()
-{
-	return _isDead;
 }

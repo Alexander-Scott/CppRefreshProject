@@ -10,17 +10,15 @@ public:
 	~Monster();
 
 	float CalculateDamageToDeal(float enemyDefenceBonus);
-	float GetCurrentHitPoints();
-	float GetDefenceBonus();
-
-	bool GetDeadStatus();
+	void ReceiveDamage(float damage);
+	void SetDead()									{ _isDead = true; }
 
 	std::string GetVictoryText();
-	std::string GetMonsterType();
 	std::string GetContestantDetails();
-
-	void ReceiveDamage(float damage);
-	void SetDead();
+	float GetCurrentHitPoints()						{ return _currentHitpoints; }
+	float GetDefenceBonus()							{ return _defenceBonus; }
+	bool GetDeadStatus()							{ return _isDead; }
+	std::string GetMonsterType()					{ return _monsterType.monsterName; }
 
 private:
 	MonsterType				_monsterType;

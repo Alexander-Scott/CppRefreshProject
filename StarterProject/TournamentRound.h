@@ -14,6 +14,9 @@ public:
 	std::vector<std::string>* Play();
 
 private:
+	static std::string BuildDeathString(Monster* contestant1, Monster* contestant2);
+	Monster* GetMonsterContestant();
+
 	std::vector<Monster*>* _monsterContestents;
 };
 

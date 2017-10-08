@@ -11,6 +11,6 @@ public:
 	Weapon GetRandomWeapon();
 
 private:
-	std::vector<Weapon>* _weapons;
+	std::vector<Weapon>*			_weapons;
 };
 

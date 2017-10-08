@@ -30,7 +30,7 @@ bool Tournament::PlayRound()
 
 	for (int i = 0; i < totalMonsters->size(); i++)
 	{
-		if (!totalMonsters->at(i).GetDeadStatus()) // If the monster is not dead, they will be in the next round
+		if (!totalMonsters->at(i).GetDeadStatus()) // If the monster is not dead, they will move forward to the next round
 		{
 			competingMonsters->push_back(&totalMonsters->at(i));
 		}

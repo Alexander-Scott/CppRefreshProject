@@ -11,7 +11,7 @@ void main()
 	Tournament* tournament = nullptr;
 
 	// Update loop
-	while (1) 
+	while (true) 
 	{ 
 		string input;
 
