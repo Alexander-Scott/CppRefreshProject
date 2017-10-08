@@ -7,16 +7,17 @@
 class MonsterManager
 {
 public:
-	explicit MonsterManager(int numberOfMonsters);
+	MonsterManager(int numberOfMonsters);
 	~MonsterManager();
 
-	std::vector<Monster>* GetMonsters() const;
+	std::vector<Monster>* GetMonsters();
 
 private:
 	void GetMonsterTypes();
 	void CreateMonsterInstances();
-	MonsterType GetRandomMonsterType() const;
+	MonsterType GetRandomMonsterType();
 
+private:
 	std::vector<MonsterType>*		_monsterTypes;
 	std::vector<Monster>*			_monsters;
 

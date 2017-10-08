@@ -18,14 +18,14 @@ enum GameState
 
 struct MonsterType 
 {
-	std::string MonsterName;
-	std::string AttackStyle;
+	std::string monsterName;
+	std::string attackStyle;
 };
 
 struct Weapon 
 {
-	std::string WeaponName;
-	float Damage;
+	std::string weaponName;
+	float damage;
 };
 
 // Reads in values from a text file and returns them as a vector of strings. Format is: 'delimiter object'.
@@ -49,17 +49,17 @@ static std::vector<std::string>* ParseConstsFromFile(const char* delimiter)
 }
 
 // Returns a random float between two floats
-static float GetRandomNumberFloat(const float min, const float max)
+static float GetRandomNumberFloat(float min, float max)
 {
 	return min + (rand() % static_cast<int>(max - min + 1));
 }
 
 // Returns a random integer between two integers
-static int GetRandomNumberInt(const int min, const int max)
+static int GetRandomNumberInt(int min, int max)
 {
 	std::random_device rd;     // only used once to initialise (seed) engine
 	std::mt19937 rng(rd());    // random-number engine used (Mersenne-Twister in this case)
-	const std::uniform_int_distribution<int> uni(min, max); // guaranteed unbiased
+	std::uniform_int_distribution<int> uni(min, max); // guaranteed unbiased
 
 	return uni(rng);
 }

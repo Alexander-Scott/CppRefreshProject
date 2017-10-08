@@ -4,7 +4,7 @@
 #include <chrono>
 #include <thread>
 
-Tournament::Tournament(const int numberOfMonsters)
+Tournament::Tournament(int numberOfMonsters)
 {
 	_monsterManager = new MonsterManager(numberOfMonsters);
 
@@ -22,13 +22,13 @@ Tournament::~Tournament()
 bool Tournament::PlayRound()
 {
 	// Initalise a new tournament round
-	auto tournamentRound = new TournamentRound;
+	TournamentRound* tournamentRound = new TournamentRound;
 
 	// This vector will hold all the monsters that are currently competing. Worked out from if they are dead or not.
-	auto competingMonsters = new std::vector<Monster*>;
-	auto totalMonsters = _monsterManager->GetMonsters();
+	std::vector<Monster*>* competingMonsters = new std::vector<Monster*>;
+	std::vector<Monster>* totalMonsters = _monsterManager->GetMonsters();
 
-	for (auto i = 0; i < totalMonsters->size(); i++)
+	for (int i = 0; i < totalMonsters->size(); i++)
 	{
 		if (!totalMonsters->at(i).GetDeadStatus()) // If the monster is not dead, they will be in the next round
 		{
@@ -43,16 +43,18 @@ bool Tournament::PlayRound()
 	std::cout << "===========================================" << std::endl;
 
 	// Play the round and return the vector of strings containg how and which monsters were killed
-	auto deathStrings = tournamentRound->Play();
+	std::vector<std::string>* deathStrings = tournamentRound->Play();
 
-	if (ROUND_RESULT_DELAY) std::this_thread::sleep_for(std::chrono::milliseconds(GetRandomNumberInt(1000, 1500)));
+	if (ROUND_RESULT_DELAY)
+		std::this_thread::sleep_for(std::chrono::milliseconds(GetRandomNumberInt(1000, 1500)));
 
 	// Print out results from the round
-	for (auto i = 0; i < deathStrings->size(); i++)
+	for (int i = 0; i < deathStrings->size(); i++)
 	{
 		std::cout << deathStrings->at(i) << std::endl;
 
-		if (ROUND_RESULT_DELAY)	std::this_thread::sleep_for(std::chrono::milliseconds(GetRandomNumberInt(10, 500)));
+		if (ROUND_RESULT_DELAY)
+			std::this_thread::sleep_for(std::chrono::milliseconds(GetRandomNumberInt(10, 500)));
 	}
 
 	std::cout << "===========================================" << std::endl;
@@ -64,7 +66,7 @@ bool Tournament::PlayRound()
 
 	if (_currentRound > _totalRounds) // If we've reached the final round
 	{
-		for (auto i = 0; i < totalMonsters->size(); i++)
+		for (int i = 0; i < totalMonsters->size(); i++)
 		{
 			if (!totalMonsters->at(i).GetDeadStatus()) // Find only alive contestant
 			{
@@ -83,7 +85,7 @@ bool Tournament::PlayRound()
 // Simple function that will calculate the number of rounds that will need to be played based on the number of monsters created
 int Tournament::CalculateNumberOfRounds(int numberOfMonsters)
 {
-	auto numberOfRounds = 0;
+	int numberOfRounds = 0;
 
 	while (numberOfMonsters != 1)
 	{

@@ -9,15 +9,15 @@ public:
 	Monster(MonsterType monsterType, Weapon weapon, int contestantNumber);
 	~Monster();
 
-	float CalculateDamageToDeal(float enemyDefenceBonus) const;
-	float GetCurrentHitPoints() const;
-	float GetDefenceBonus() const;
+	float CalculateDamageToDeal(float enemyDefenceBonus);
+	float GetCurrentHitPoints();
+	float GetDefenceBonus();
 
-	bool GetDeadStatus() const;
+	bool GetDeadStatus();
 
-	std::string GetVictoryText() const;
-	std::string GetMonsterType() const;
-	std::string GetContestantDetails() const;
+	std::string GetVictoryText();
+	std::string GetMonsterType();
+	std::string GetContestantDetails();
 
 	void ReceiveDamage(float damage);
 	void SetDead();

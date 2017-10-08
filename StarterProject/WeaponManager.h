@@ -8,7 +8,7 @@ public:
 	WeaponManager();
 	~WeaponManager();
 
-	Weapon GetRandomWeapon() const;
+	Weapon GetRandomWeapon();
 
 private:
 	std::vector<Weapon>* _weapons;
