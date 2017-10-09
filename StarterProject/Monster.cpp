@@ -3,7 +3,7 @@
 // Creates a monster object and recieves various parameters. The rest of the attributes are randomly generated
 Monster::Monster(MonsterType monsterType, Weapon weapon, int contestantNumber)
 {
-	_startHitpoints = GetRandomNumberFloat(600, 1000);
+	_startHitpoints = GetRandomNumberFloat(800, 1000);
 	_currentHitpoints = _startHitpoints;
 
 	_attackAccuracy = GetRandomNumberFloat(50, 80);

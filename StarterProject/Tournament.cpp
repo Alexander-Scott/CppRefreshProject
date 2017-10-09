@@ -10,6 +10,8 @@ Tournament::Tournament(int numberOfMonsters)
 
 	_currentRound = 1;
 	_totalRounds = CalculateNumberOfRounds(numberOfMonsters);
+
+	std::cout << "Tournament created with " << numberOfMonsters << " monsters. Press any key to start the tournament." << std::endl;
 }
 
 Tournament::~Tournament()

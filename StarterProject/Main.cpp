@@ -27,7 +27,6 @@ void main()
 					numberOfMonsters = std::stoi(input);
 					tournament = new Tournament(numberOfMonsters);
 
-					cout << "Tournament created with " << numberOfMonsters << " monsters. Press any key to start the tournament." << std::endl;
 					gameState = WaitingToStartRound;
 				}
 				catch (std::exception& e)

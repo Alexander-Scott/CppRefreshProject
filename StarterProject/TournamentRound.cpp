@@ -51,13 +51,17 @@ std::vector<std::string>* TournamentRound::Play()
 		}
 
 		// Check who has died (hp less than 0) and then build a death string from the contestants details
-		if (contestant1->GetCurrentHitPoints() <= 0)
+		if (contestant1->GetCurrentHitPoints() <= 0 && contestant2->GetCurrentHitPoints() <= 0)
 		{
-			deathStrings->push_back(BuildDeathString(contestant1, contestant2));
+			deathStrings->push_back(BuildDoubleDeathString(contestant1, contestant2));
 		}
-		else
+		else if (contestant1->GetCurrentHitPoints() <= 0)
 		{
 			deathStrings->push_back(BuildDeathString(contestant2, contestant1));
+		}
+		else if (contestant2->GetCurrentHitPoints() <= 0)
+		{
+			deathStrings->push_back(BuildDeathString(contestant1, contestant2));
 		}
 	}
 
@@ -70,7 +74,19 @@ std::string TournamentRound::BuildDeathString(Monster* winner, Monster* loser)
 
 	std::stringstream ss;
 	ss << "Contestant " << winner->GetContestantDetails() << ", a " << winner->GetVictoryText() << " Contestant "
-		<< loser->GetContestantDetails() << ", a " << loser->GetMonsterType() << ".";
+		<< loser->GetContestantDetails() << ", a " << loser->GetMonsterType() << ", with just " << winner->GetCurrentHitPoints() << " hitpoints remaining!";
+
+	return ss.str();
+}
+
+std::string TournamentRound::BuildDoubleDeathString(Monster * contestant1, Monster * contestant2)
+{
+	contestant1->SetDead();
+	contestant2->SetDead();
+
+	std::stringstream ss;
+	ss << "Contestant " << contestant1->GetContestantDetails() << ", a " << contestant1->GetMonsterType() << ", and Contestant " 
+		<< contestant2->GetContestantDetails() << ", a " << contestant2->GetMonsterType() << ", killed eachother!";
 
 	return ss.str();
 }

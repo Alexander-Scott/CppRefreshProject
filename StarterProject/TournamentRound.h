@@ -15,6 +15,7 @@ public:
 
 private:
 	static std::string BuildDeathString(Monster* contestant1, Monster* contestant2);
+	static std::string BuildDoubleDeathString(Monster* contestant1, Monster* contestant2);
 	Monster* GetMonsterContestant();
 
 	std::vector<Monster*>* _monsterContestents;
